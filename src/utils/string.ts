@@ -1,3 +1,6 @@
+import { atob } from 'abab';
+import { TextDecoder } from 'text-encoding';
+
 export function padLeft(n: any, amount: number, pad: string = '0'): string {
   let str = n + '';
   for (let i = str.length; i < amount; i++) {
@@ -26,4 +29,12 @@ export function hexStringToByte(str: string): Uint8Array {
   }
   
   return new Uint8Array(a);
+}
+
+export function toByteArray(encoded: string): Uint8Array {
+  return new Uint8Array(
+    atob(encoded)
+      .split("")
+      .map(x => x.charCodeAt(0))
+  );
 }

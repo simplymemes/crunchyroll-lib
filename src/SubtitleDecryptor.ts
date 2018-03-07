@@ -71,7 +71,7 @@ export class SubtitleDecryptor implements ISubtitleDecryptor {
    */
   decrypt(): Uint8Array {
     const aesCbc = new aes.ModeOfOperation.cbc(this.getKey(), this.iv);
-    const decryptedData = new Uint8Array(aesCbc.decrypt(this.data));
+    const decryptedData = aesCbc.decrypt(this.data);
 
     return pako.inflate(decryptedData);
   }

@@ -1,17 +1,22 @@
-import { IConfig } from "./models/IConfig";
 import { BrowserHttpClient } from "./services/http/BrowserHttpClient";
 import { NodeHttpClient } from "./services/http/NodeHttpClient";
-import { StreamResolver } from "./resolvers/StreamResolver";
+import Container from "./config";
+import { IMediaResolver } from "./models/IMediaResolver";
 
-const config: IConfig = {};
+const MediaResolver = Container.get<IMediaResolver>("IMediaResolver");
 
-config.HttpClient = new NodeHttpClient();
-config.StreamResolver = new StreamResolver(config);
+const run = async () => {
+  const media = await MediaResolver
+    .getMedia('740239', '106', '60', 'http://www.crunchyroll.com/boruto-naruto-next-generations/episode-17-run-sarada-740239?p360=1');
+  
+  const subtitles = media.getSubtitles();
+  for (let i = 0; i < subtitles.length; i++)  {
+    if (subtitles[i].isDefault()) {
+      console.log(await subtitles[i].getContentAsString());
+      break;
+    }
+  }
+};
 
-export function setConfig<K extends keyof IConfig>(name: K, value: IConfig[K]) {
-  config[name] = value;
-}
-
-config.StreamResolver
-  .getStream('740239', '106', '60', 'http://www.crunchyroll.com/boruto-naruto-next-generations/episode-17-run-sarada-740239?p360=1')
-  .then(console.log.bind(console), console.error.bind(console));
+run()
+.then(undefined, err => console.error(err));

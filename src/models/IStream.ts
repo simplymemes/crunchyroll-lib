@@ -14,7 +14,7 @@ export interface IStream {
    * Returns the file host.
    */
   getHost(): string|undefined;
-  
+
   /**
    * Returns the duration of the stream.
    */
