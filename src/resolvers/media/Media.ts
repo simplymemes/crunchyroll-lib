@@ -33,6 +33,10 @@ export class Media implements IMedia {
     return new Stream(this._config.preload.streamInfo);
   }
 
+  getNextVideoUrl(): string {
+    throw this._config.nextUrl;
+  }
+
   getSubtitles(): ISubtitle[] {
     const subtitles: ISubtitle[] = [];
 

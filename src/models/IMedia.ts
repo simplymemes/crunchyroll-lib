@@ -14,6 +14,11 @@ export interface IMedia {
   getMetadata(): IMediaMetadata;
 
   /**
+   * Returns the next video URL.
+   */
+  getNextVideoUrl(): string;
+
+  /**
    * Returns the stream.
    */
   getStream(): IStream;
