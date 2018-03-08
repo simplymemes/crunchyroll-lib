@@ -12,8 +12,8 @@
     "url": "https://github.com/YePpHa/crunchyroll-lib/issues"
   },
   "dependencies": {
-    "abab": "^1.0.4",
     "aes-js": "^3.1.0",
+    "base64-js": "^1.2.3",
     "big-integer": "^1.6.26",
     "pako": "^1.0.6",
     "request": "^2.83.0",
@@ -21,6 +21,7 @@
     "text-encoding": "^0.6.4"
   },
   "devDependencies": {
+    "@types/base64-js": "^1.2.5",
     "@types/pako": "^1.0.0",
     "@types/request": "^2.0.11",
     "@types/sax": "^1.0.0",

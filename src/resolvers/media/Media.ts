@@ -10,7 +10,7 @@ import { Stream } from './Stream';
 import { MediaMetadata } from './MediaMetadata';
 import { Subtitle } from './Subtitle';
 import { PreloadedSubtitle } from '../../models/PreloadedSubtitle';
-import { toByteArray } from '../../utils/string';
+import { toByteArray } from 'base64-js';
 
 export class Media implements IMedia {
   private _config: Config;

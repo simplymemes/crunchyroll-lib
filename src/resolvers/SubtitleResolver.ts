@@ -6,7 +6,7 @@ import { SubtitleDecryptor } from "../SubtitleDecryptor";
 import { PreloadedSubtitle } from "../models/PreloadedSubtitle";
 import { Container } from "../utils/container";
 import { IHttpClient } from "../models/http/IHttpClient";
-import { toByteArray } from "../utils/string";
+import { toByteArray } from 'base64-js';
 
 export class SubtitleResolver implements ISubtitleResolver {
   private _httpClient: IHttpClient;
