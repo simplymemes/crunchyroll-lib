@@ -1,22 +1,16 @@
 import { BrowserHttpClient } from "./services/http/BrowserHttpClient";
-import { NodeHttpClient } from "./services/http/NodeHttpClient";
-import Container from "./config";
-import { IMediaResolver } from "./models/IMediaResolver";
+import container from "./config";
+import { IMediaResolver, IMediaOptions } from "./models/IMediaResolver";
+import { IMedia } from "./models/IMedia";
+import { IHttpClient } from "./models/http/IHttpClient";
+import { Container } from "./utils/container";
 
-const MediaResolver = Container.get<IMediaResolver>("IMediaResolver");
+export async function getMedia(mediaId: string, streamFormat: string, streamQuality: string, currentPage: string, options?: IMediaOptions): Promise<IMedia> {
+  const MediaResolver = container.get<IMediaResolver>("IMediaResolver");
 
-const run = async () => {
-  const media = await MediaResolver
-    .getMedia('740239', '106', '60', 'http://www.crunchyroll.com/boruto-naruto-next-generations/episode-17-run-sarada-740239?p360=1');
-  
-  const subtitles = media.getSubtitles();
-  for (let i = 0; i < subtitles.length; i++)  {
-    if (subtitles[i].isDefault()) {
-      console.log(await subtitles[i].getContentAsString());
-      break;
-    }
-  }
-};
+  return await MediaResolver.getMedia(mediaId, streamFormat, streamQuality, currentPage, options);
+}
 
-run()
-.then(undefined, err => console.error(err));
+export function setHttpClient(httpClient: { new(container: Container, ...args: any[]): IHttpClient }): void {
+  container.bind("IHttpClient", httpClient);
+}

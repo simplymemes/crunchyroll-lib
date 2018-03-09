@@ -6,8 +6,16 @@
   "scripts": {
     "build": "tsc"
   },
-  "author": "Jeppe Rune Mortensen <jepperm@gmail.com>",
+  "author": {
+    "name": "Jeppe Rune Mortensen",
+    "email": "jepperm@gmail.com",
+    "url": "https://github.com/YePpHa"
+  },
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/YePpHa/crunchyroll-lib"
+  },
   "bugs": {
     "url": "https://github.com/YePpHa/crunchyroll-lib/issues"
   },

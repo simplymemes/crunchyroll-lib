@@ -1,11 +1,11 @@
 import { Container } from "./utils/container";
-import { NodeHttpClient } from "./services/http/NodeHttpClient";
 import { MediaResolver } from "./resolvers/MediaResolver";
 import { SubtitleResolver } from "./resolvers/SubtitleResolver";
+import { BrowserHttpClient } from "./services/http/BrowserHttpClient";
 
 const container = new Container();
 
-container.bind("IHttpClient", NodeHttpClient);
+container.bind("IHttpClient", BrowserHttpClient);
 container.bind("IMediaResolver", MediaResolver);
 container.bind("ISubtitleResolver", SubtitleResolver);
 
