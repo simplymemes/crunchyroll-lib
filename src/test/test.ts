@@ -1,5 +1,5 @@
-import { NodeHttpClient } from "./services/http/NodeHttpClient";
-import { getMedia, setHttpClient } from "./index";
+import { NodeHttpClient } from "../services/http/NodeHttpClient";
+import { getMedia, setHttpClient } from "../index";
 
 // Set the Http client to Node
 setHttpClient(NodeHttpClient);
