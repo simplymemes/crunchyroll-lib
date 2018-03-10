@@ -1,7 +1,7 @@
-import { ISubtitleDecryptor } from "./models/ISubtitleDecryptor";
+import { ISubtitleDecryptor } from "../models/ISubtitleDecryptor";
 import { TextEncoder } from 'text-encoding';
-import { SHA1 } from './utils/hash/sha1';
-import { hexStringToByte } from './utils/string';
+import { SHA1 } from '../utils/hash/sha1';
+import { hexStringToByte } from '../utils/string';
 import * as bigInt from 'big-integer';
 import * as aes from 'aes-js';
 import * as pako from 'pako';

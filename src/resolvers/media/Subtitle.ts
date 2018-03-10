@@ -49,8 +49,4 @@ export class Subtitle implements ISubtitle {
   getDelay(): number {
     return this._delay;
   }
-
-  getLocale(): string {
-    throw new Error("Method not implemented.");
-  }
 }

@@ -14,3 +14,9 @@ import { setHttpClient } from "./index";
 // Set the Http client in the start of the application.
 setHttpClient(NodeHttpClient);
 ```
+
+# Examples
+## Browser
+```TypeScript
+
+```

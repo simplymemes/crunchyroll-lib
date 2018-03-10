@@ -2,7 +2,7 @@ import { ISubtitleResolver } from "../models/ISubtitleResolver";
 import { ISubtitle } from "../models/ISubtitle";
 import { DOMParser } from "../services/xml/DOMParser";
 import { Element } from "../services/xml/Element";
-import { SubtitleDecryptor } from "../SubtitleDecryptor";
+import { SubtitleDecryptor } from "../services/SubtitleDecryptor";
 import { PreloadedSubtitle } from "../models/PreloadedSubtitle";
 import { Container } from "../utils/container";
 import { IHttpClient } from "../models/http/IHttpClient";

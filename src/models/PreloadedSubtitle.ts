@@ -26,8 +26,8 @@ export class PreloadedSubtitle implements ISubtitle {
     return Promise.resolve(this._content);
   }
 
-  getContentAsString(): Promise<string> {
-    return Promise.resolve(new TextDecoder("utf-8").decode(this._content));
+  async getContentAsString(): Promise<string> {
+    return new TextDecoder("utf-8").decode(this._content);
   }
 
   getAuthor(): string {
@@ -40,9 +40,5 @@ export class PreloadedSubtitle implements ISubtitle {
 
   getDelay(): number {
     return this._delay;
-  }
-
-  getLocale(): string {
-    throw new Error("Method not implemented.");
   }
 }

@@ -28,10 +28,4 @@ export interface ISubtitle {
    * Returns the amount of delay to apply to the subtitle.
    */
   getDelay(): number;
-
-  /**
-   * Returns the locale (RFC 5646) of the subtitle.
-   * @see https://tools.ietf.org/html/rfc5646
-   */
-  getLocale(): string;
 }

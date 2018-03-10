@@ -1,7 +1,7 @@
 import { IHttpClient, BodyType } from "../../models/http/IHttpClient";
 import { IOptions } from "../../models/http/IOptions";
 import { IResponse } from "../../models/http/IResponse";
-import * as request from 'request';
+import request = require('request');
 
 function processBody(body?: BodyType): string|undefined {
   if (!body) return undefined;
