@@ -1,5 +1,7 @@
+export type ContainerConstructor<T> = { new(container: Container, ...args: any[]): T };
+
 interface IContainerConstructors {
-  constructor: { new(...args: any[]): any };
+  constructor: ContainerConstructor<any>;
   args: any[];
 }
 
@@ -7,7 +9,7 @@ export class Container {
   private _boundConstructors: {[key: string]: IContainerConstructors} = {};
   private _instances: {[key: string]: any} = {};
 
-  bind(token: string, constructor: { new(container: Container, ...args: any[]): any }, ...args: any[]): void {
+  bind(token: string, constructor: ContainerConstructor<any>, ...args: any[]): void {
     if (this._boundConstructors.hasOwnProperty(token)) {
       delete this._boundConstructors[token];
     }
