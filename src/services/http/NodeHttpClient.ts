@@ -29,11 +29,12 @@ function getResponse(req: request.RequestResponse): IResponse<string> {
 }
 
 export class NodeHttpClient implements IHttpClient {
-  get(url: string, options?: IOptions): Promise<IResponse<string>> {
-    return this.method('GET', url, undefined, options);
+  async get(url: string, options?: IOptions): Promise<IResponse<string>> {
+    return await this.method('GET', url, undefined, options);
   }
-  post(url: string, body?: BodyType, options?: IOptions): Promise<IResponse<string>> {
-    return this.method('GET', url, body, options);
+
+  async post(url: string, body?: BodyType, options?: IOptions): Promise<IResponse<string>> {
+    return await this.method('POST', url, body, options);
   }
 
   method(method: string, url: string, body?: BodyType, options?: IOptions): Promise<IResponse<string>> {
@@ -47,7 +48,8 @@ export class NodeHttpClient implements IHttpClient {
           reject(err);
         } else {
           const res = getResponse(response);
-          if (response.statusCode === 200) {
+          const statusCode = response.statusCode || 0;
+          if (statusCode >= 200 && statusCode < 300) {
             resolve(res);
           } else {
             reject(res);

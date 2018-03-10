@@ -5,14 +5,12 @@ import { getMedia, setHttpClient } from "./index";
 setHttpClient(NodeHttpClient);
 
 const run = async () => {
-  const media = await getMedia('740239', '106', '60', 'http://www.crunchyroll.com/boruto-naruto-next-generations/episode-17-run-sarada-740239?p360=1');
+  const media = await getMedia('740239', '360p', 'http://www.crunchyroll.com/boruto-naruto-next-generations/episode-17-run-sarada-740239?p360=1');
   
   const subtitles = media.getSubtitles();
+  console.log("name, author, default");
   for (let i = 0; i < subtitles.length; i++)  {
-    if (subtitles[i].isDefault()) {
-      console.log(await subtitles[i].getContentAsString());
-      break;
-    }
+    console.log(subtitles[i].getTitle() + ", " + subtitles[i].getAuthor() + ", " + (subtitles[i].isDefault() ? "true" : "false"));
   }
 };
 

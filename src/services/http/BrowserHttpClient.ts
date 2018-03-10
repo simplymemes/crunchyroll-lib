@@ -28,11 +28,12 @@ function getResponse(req: XMLHttpRequest): IResponse<string> {
 }
 
 export class BrowserHttpClient implements IHttpClient {
-  get(url: string, options?: IOptions): Promise<IResponse<string>> {
-    return this.method('GET', url, undefined, options);
+  async get(url: string, options?: IOptions): Promise<IResponse<string>> {
+    return await this.method('GET', url, undefined, options);
   }
-  post(url: string, body?: BodyType, options?: IOptions | undefined): Promise<IResponse<string>> {
-    return this.method('GET', url, body, options);
+
+  async post(url: string, body?: BodyType, options?: IOptions | undefined): Promise<IResponse<string>> {
+    return await this.method('POST', url, body, options);
   }
 
   method(method: string, url: string, body?: BodyType, options?: IOptions): Promise<IResponse<string>> {
@@ -43,7 +44,7 @@ export class BrowserHttpClient implements IHttpClient {
       req.addEventListener("load", () => {
         if (req.readyState === 4) {
           try {
-            if (req.status === 200) {
+            if (req.status >= 200 && req.status < 300) {
               resolve(getResponse(req));
             } else {
               reject(getResponse(req));
