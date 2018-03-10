@@ -58,7 +58,21 @@ function searchFor(text: string, start: string, end: string): string {
   return text.substring(0, endIndex);
 }
 
+/**
+ * Returns the media.
+ * @param url the URL of the media.
+ * @param videoQuality the quality of the video.
+ * @param options the options passed to Crunchyroll.
+ */
 export async function getMediaByUrl(url: string, videoQuality: keyof Formats, options?: IMediaOptions): Promise<IMedia>;
+
+/**
+ * Returns the media.
+ * @param url the URL of the media.
+ * @param streamFormat the format ID of the video.
+ * @param streamQuality the quality ID of the video.
+ * @param options the options passed to Crunchyroll.
+ */
 export async function getMediaByUrl(url: string, streamFormat: string, streamQuality: string, options?: IMediaOptions): Promise<IMedia>;
 
 export async function getMediaByUrl(url: string, streamFormatOrVideoQuality: string|keyof Formats, streamQualityOrOptions?: string|IMediaOptions, options?: IMediaOptions): Promise<IMedia> {
@@ -88,7 +102,23 @@ export async function getMediaByUrl(url: string, streamFormatOrVideoQuality: str
   return await getMedia(mediaId, format, quality, url, options);
 }
 
+/**
+ * Returns the media.
+ * @param mediaId the ID of the media
+ * @param videoQuality the quality of the video.
+ * @param currentPage the URL of the media.
+ * @param options the options passed to Crunchyroll.
+ */
 export async function getMedia(mediaId: string, videoQuality: keyof Formats, currentPage: string, options?: IMediaOptions): Promise<IMedia>;
+
+/**
+ * Returns the media.
+ * @param mediaId the ID of the media
+ * @param streamFormat the format ID of the video.
+ * @param streamQuality the quality ID of the video.
+ * @param currentPage the URL of the media.
+ * @param options the options passed to Crunchyroll.
+ */
 export async function getMedia(mediaId: string, streamFormat: string, streamQuality: string, currentPage: string, options?: IMediaOptions): Promise<IMedia>;
 
 export async function getMedia(mediaId: string, videoQualityOrStreamFormat: string|keyof Formats, currentPageOrStreamQuality: string, optionsOrCurrentPage?: string|IMediaOptions, options?: IMediaOptions): Promise<IMedia> {
