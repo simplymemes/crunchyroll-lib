@@ -37,4 +37,9 @@ export interface IMedia {
    * Returns the time at which to resume the media from.
    */
   getStartTime(): number;
+
+  /**
+   * Returns the ping intervals in ms.
+   */
+  getPingIntervals(): number[];
 }

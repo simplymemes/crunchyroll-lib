@@ -1,6 +1,6 @@
 {
   "name": "crunchyroll-lib",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "main": "bundles/crunchyroll-lib.umd.js",
   "types": "index.d.ts",
   "module": "index.js",

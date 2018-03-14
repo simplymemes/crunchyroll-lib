@@ -29,4 +29,9 @@ export interface IStream {
    * Returns the height of the stream.
    */
   getHeight(): number;
+
+  /**
+   * Returns the encode ID.
+   */
+  getEncodeId(): string;
 }

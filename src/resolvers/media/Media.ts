@@ -21,6 +21,12 @@ export class Media implements IMedia {
     this._subtitleResolver = subtitleResolver;
   }
 
+  getPingIntervals(): number[] {
+    return this._config.preload.config.pingBackIntervals
+      .split(" ")
+      .map(x => parseFloat(x));
+  }
+
   isAutoPlay(): boolean {
     return this._config.isAutoPlay;
   }

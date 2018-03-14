@@ -31,4 +31,8 @@ export class Stream implements IStream {
   getHeight(): number {
     return this._stream.metadata.height;
   }
+
+  getEncodeId(): string {
+    return this._stream.videoEncodeId;
+  }
 }
