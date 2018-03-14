@@ -1,9 +1,14 @@
 {
   "name": "crunchyroll-lib",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "unpkg": "_bundles/crunchyroll-lib.min.js",
+  "files": [
+    "_bundles",
+    "lib",
+    "lib-esm"
+  ],
   "scripts": {
     "clean": "shx rm -rf _bundles lib lib-esm",
     "build": "npm run clean && tsc && tsc -m es6 --outDir lib-esm && webpack",
