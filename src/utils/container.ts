@@ -31,4 +31,12 @@ export class Container {
 
     return this._instances[token];
   }
+
+  getConstructor<T>(token: string): ContainerConstructor<T> {
+    if (!this._boundConstructors.hasOwnProperty(token)) {
+      throw new Error("Constructor token " + token + " not bound.");
+    }
+
+    return this._boundConstructors[token].constructor;
+  }
 }
