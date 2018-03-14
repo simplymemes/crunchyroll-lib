@@ -27,4 +27,14 @@ export interface IMedia {
    * Returns list of subtitles.
    */
   getSubtitles(): ISubtitle[];
+
+  /**
+   * Returns whether to auto-play the media.
+   */
+  isAutoPlay(): boolean;
+
+  /**
+   * Returns the time at which to resume the media from.
+   */
+  getStartTime(): number;
 }

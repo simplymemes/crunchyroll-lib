@@ -27,12 +27,12 @@ export class SubtitleResolver implements ISubtitleResolver {
     if (!body)
       throw new Error("Empty DOM");
     
-    const subtitleDecryptionData = new SubtitleData(body);
+    const subtitleDecryptionModel = new SubtitleModel(body);
 
-    const iv = toByteArray(subtitleDecryptionData.iv);
-    const data = toByteArray(subtitleDecryptionData.data);
+    const iv = toByteArray(subtitleDecryptionModel.iv);
+    const data = toByteArray(subtitleDecryptionModel.data);
 
-    return this.getSubtitle(subtitleDecryptionData.id, iv, data);
+    return this.getSubtitle(subtitleDecryptionModel.id, iv, data);
   }
 
   getSubtitle(id: number, iv: Uint8Array, data: Uint8Array): Uint8Array {
@@ -42,7 +42,7 @@ export class SubtitleResolver implements ISubtitleResolver {
   }
 }
 
-export class SubtitleData {
+export class SubtitleModel {
   private _element: Element;
 
   constructor(element: Element) {

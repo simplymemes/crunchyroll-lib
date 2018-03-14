@@ -1,38 +1,7 @@
-import { Element } from '../../services/xml/Element';
-import { ParentNode } from "../../services/xml/ParentNode";
 import { ConfigPreload } from './ConfigPreload';
+import { BaseModel } from './BaseModel';
 
-export class Config {
-  private _element: ParentNode;
-
-  constructor(element: ParentNode) {
-    this._element = element;
-  }
-
-  private _getValue(name: string): string {
-    return this._getElement(name).textContent;
-  }
-
-  private _getElement(name: string): Element {
-    const children = this._element.children;
-    for (let i = 0; i < children.length; i++) {
-      if (children[i].tagName === name) {
-        return children[i];
-      }
-    }
-    throw new Error(`Unable to get property ${name} from StreamInfo.`);
-  }
-
-  private _getElementOrUndefined(name: string): Element|undefined {
-    const children = this._element.children;
-    for (let i = 0; i < children.length; i++) {
-      if (children[i].tagName === name) {
-        return children[i];
-      }
-    }
-    return undefined;
-  }
-
+export class Config extends BaseModel {
   get nextUrl(): string {
     return this._getValue('default:nextUrl');
   }

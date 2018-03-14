@@ -21,6 +21,14 @@ export class Media implements IMedia {
     this._subtitleResolver = subtitleResolver;
   }
 
+  isAutoPlay(): boolean {
+    return this._config.isAutoPlay;
+  }
+
+  getStartTime(): number {
+    return this._config.startTime;
+  }
+
   getId(): string {
     return this._config.preload.mediaMetadata.mediaId;
   }
@@ -52,9 +60,9 @@ export class Media implements IMedia {
         const data = toByteArray(preloadedData.data);
 
         const content = this._subtitleResolver.getSubtitle(preloadedData.id, iv, data);
-        subtitles.push(new PreloadedSubtitle(content, item.title, item.author, item.isDefault, item.delay));
+        subtitles.push(new PreloadedSubtitle(content, item.id, item.title, item.author, item.isDefault, item.delay));
       } else {
-        subtitles.push(new Subtitle(this._subtitleResolver, item.url, item.title, item.author, item.isDefault, item.delay));
+        subtitles.push(new Subtitle(this._subtitleResolver, item.url, item.id, item.title, item.author, item.isDefault, item.delay));
       }
     }
 

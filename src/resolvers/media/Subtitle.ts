@@ -3,6 +3,7 @@ import { SingleAsync } from "../../utils/SingleAsync";
 import { ISubtitle } from "../../models/ISubtitle";
 
 export class Subtitle implements ISubtitle {
+  private _id: number;
   private _title: string;
   private _author: string;
   private _isDefault: boolean;
@@ -13,7 +14,8 @@ export class Subtitle implements ISubtitle {
   private _resolver: ISubtitleResolver;
   private _singleRequest: SingleAsync<Uint8Array>;
 
-  constructor(resolver: ISubtitleResolver, url: string, title: string, author: string, isDefault: boolean, delay: number) {
+  constructor(resolver: ISubtitleResolver, url: string, id: number, title: string, author: string, isDefault: boolean, delay: number) {
+    this._id = id;
     this._title = title;
     this._author = author;
     this._isDefault = isDefault;
@@ -24,6 +26,10 @@ export class Subtitle implements ISubtitle {
     this._resolver = resolver;
 
     this._singleRequest = new SingleAsync(async () => await this._resolver.getSubtitleByUrl(this._url));
+  }
+
+  getId(): number {
+    return this._id;
   }
 
   getTitle(): string {

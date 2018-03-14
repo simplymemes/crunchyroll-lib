@@ -2,6 +2,7 @@ import { ISubtitle } from "./ISubtitle";
 import { TextDecoder } from 'text-encoding';
 
 export class PreloadedSubtitle implements ISubtitle {
+  private _id: number;
   private _title: string;
   private _author: string;
   private _isDefault: boolean;
@@ -9,13 +10,18 @@ export class PreloadedSubtitle implements ISubtitle {
 
   private _content: Uint8Array;
 
-  constructor(content: Uint8Array, title: string, author: string, isDefault: boolean, delay: number) {
+  constructor(content: Uint8Array, id: number, title: string, author: string, isDefault: boolean, delay: number) {
+    this._id = id;
     this._title = title;
     this._author = author;
     this._isDefault = isDefault;
     this._delay = delay;
 
     this._content = content;
+  }
+
+  getId(): number {
+    return this._id;
   }
 
   getTitle(): string {

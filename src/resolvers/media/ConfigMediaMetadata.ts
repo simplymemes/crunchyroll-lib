@@ -1,27 +1,6 @@
-import { Element } from '../../services/xml/Element';
-import { ParentNode } from "../../services/xml/ParentNode";
+import { BaseModel } from './BaseModel';
 
-export class ConfigMediaMetadata {
-  private _element: ParentNode;
-
-  constructor(element: ParentNode) {
-    this._element = element;
-  }
-
-  private _getValue(name: string): string {
-    return this._getElement(name).textContent;
-  }
-
-  private _getElement(name: string): Element {
-    const children = this._element.children;
-    for (let i = 0; i < children.length; i++) {
-      if (children[i].tagName === name) {
-        return children[i];
-      }
-    }
-    throw new Error(`Unable to get property ${name} from StreamInfo.`);
-  }
-
+export class ConfigMediaMetadata extends BaseModel {
   get mediaId(): string {
     return this._getValue('media_id');
   }

@@ -1,5 +1,10 @@
 export interface ISubtitle {
   /**
+   * Returns the ID of the subtitle.
+   */
+  getId(): number;
+
+  /**
    * Returns the title of the subtitle.
    */
   getTitle(): string;
