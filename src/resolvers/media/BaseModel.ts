@@ -11,6 +11,12 @@ export class BaseModel {
     return this._getElement(tagName).textContent;
   }
 
+  protected _getValueOrUndefined(tagName: string): string|undefined {
+    const element = this._getElementOrUndefined(tagName);
+    if (!element) return undefined;
+    return element.textContent;
+  }
+
   protected _getElement(tagName: string): Element {
     const children = this._element.children;
     for (let i = 0; i < children.length; i++) {

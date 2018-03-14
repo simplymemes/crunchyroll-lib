@@ -22,9 +22,7 @@ export class Media implements IMedia {
   }
 
   getPingIntervals(): number[] {
-    return this._config.preload.config.pingBackIntervals
-      .split(" ")
-      .map(x => parseFloat(x));
+    return this._config.preload.config.pingBackIntervals;
   }
 
   isAutoPlay(): boolean {

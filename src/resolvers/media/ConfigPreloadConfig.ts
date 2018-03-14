@@ -25,7 +25,14 @@ export class ConfigPreloadConfig extends BaseModel {
     return this._getValue("default:pingBackTimerPeriod");
   }
 
-  get pingBackIntervals(): string {
-    return this._getValue("default:pingBackIntervals");
+  get pingBackIntervals(): number[] {
+    const intervals = this._getValueOrUndefined("default:pingBackIntervals");
+    if (intervals) {
+      return intervals
+        .split(" ")
+        .map(x => parseFloat(x));
+    } else {
+      return [ 30000 ];
+    }
   }
 }
