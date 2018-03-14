@@ -4,11 +4,11 @@ const path = require('path')
 
 module.exports = {
   entry: {
-    'crunchyroll-lib': './src/index.ts',
-    'crunchyroll-lib.min': './src/index.ts'
+    'crunchyroll-lib.umd': './src/index.ts',
+    'crunchyroll-lib.umd.min': './src/index.ts'
   },
   output: {
-    path: path.resolve(__dirname, '_bundles'),
+    path: path.resolve(__dirname, 'dist', 'bundles'),
     filename: '[name].js',
     libraryTarget: 'umd',
     library: 'CrunchyrollLib',

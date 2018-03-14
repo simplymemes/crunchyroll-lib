@@ -1,18 +1,17 @@
 {
   "name": "crunchyroll-lib",
-  "version": "1.0.1",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
-  "unpkg": "_bundles/crunchyroll-lib.min.js",
+  "version": "1.0.5",
+  "main": "bundles/crunchyroll-lib.umd.js",
+  "types": "index.d.ts",
+  "module": "index.js",
+  "es2015": "es2015/index.js",
   "files": [
-    "_bundles",
-    "lib",
-    "lib-esm"
+    "**/**"
   ],
   "scripts": {
-    "clean": "shx rm -rf _bundles lib lib-esm",
-    "build": "npm run clean && tsc && tsc -m es6 --outDir lib-esm && webpack",
-    "prepublishOnly": "npm run build"
+    "clean": "shx rm -rf dist",
+    "build": "npm run clean && tsc && tsc -m es6 --outDir dist/es2015 && webpack && shx cp package.json dist/package.json",
+    "yarn:publish": "yarn run build && cd dist && yarn publish && cd .."
   },
   "author": {
     "name": "Jeppe Rune Mortensen",

@@ -14,7 +14,7 @@ export class SingleAsync<T> {
   private _fn: (...args: any[]) => Promise<T>;
   private _args: any[];
 
-  private _state: SingleAsyncState;
+  private _state: SingleAsyncState = SingleAsyncState.Pending;
   private _value: T|undefined;
   private _error: any;
 
