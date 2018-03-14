@@ -46,7 +46,7 @@ export class Media implements IMedia {
   }
 
   getNextVideoUrl(): string {
-    throw this._config.nextUrl;
+    return this._config.nextUrl;
   }
 
   getSubtitles(): ISubtitle[] {
