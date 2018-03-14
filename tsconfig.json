@@ -6,17 +6,18 @@
     "declaration": true,
     "noEmitOnError": true,
     "target": "es5",
-    "lib": ["es5", "es6", "es2015.collection", "es2015.iterable", "dom"],
+    "lib": ["es5", "es6", "dom", "es2015.collection", "es2015.iterable"],
     "sourceMap": true,
     "typeRoots": [
       "node_modules/@types"
     ],
-    "outDir": "./dist",
+    "outDir": "./lib",
     "preserveConstEnums": true,
     "noImplicitAny": true,
     "noImplicitThis": true,
     "noImplicitReturns": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "moduleResolution": "node"
   },
   "include": [
     "src/**/*"

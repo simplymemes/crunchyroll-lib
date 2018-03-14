@@ -1,10 +1,13 @@
 {
   "name": "crunchyroll-lib",
   "version": "1.0.0",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "unpkg": "_bundles/crunchyroll-lib.min.js",
   "scripts": {
-    "build": "tsc"
+    "clean": "shx rm -rf _bundles lib lib-esm",
+    "build": "npm run clean && tsc && tsc -m es6 --outDir lib-esm && webpack",
+    "prepublishOnly": "npm run build"
   },
   "author": {
     "name": "Jeppe Rune Mortensen",
@@ -24,7 +27,6 @@
     "base64-js": "^1.2.3",
     "big-integer": "^1.6.26",
     "pako": "^1.0.6",
-    "request": "^2.83.0",
     "sax": "^1.2.4",
     "text-encoding": "^0.6.4"
   },
@@ -33,6 +35,15 @@
     "@types/pako": "^1.0.0",
     "@types/request": "^2.0.11",
     "@types/sax": "^1.0.0",
-    "@types/text-encoding": "^0.0.32"
+    "@types/text-encoding": "^0.0.32",
+    "awesome-typescript-loader": "^4.0.1",
+    "shx": "^0.2.2",
+    "typescript": "^2.7.2",
+    "uglifyjs-webpack-plugin": "^1.2.3",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.12"
+  },
+  "optionalDependencies": {
+    "request": "^2.85.0"
   }
 }
