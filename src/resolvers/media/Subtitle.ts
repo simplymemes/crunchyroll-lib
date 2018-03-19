@@ -1,6 +1,7 @@
 import { ISubtitleResolver } from "../../models/ISubtitleResolver";
 import { SingleAsync } from "../../utils/SingleAsync";
 import { ISubtitle } from "../../models/ISubtitle";
+import { TextDecoder } from 'text-encoding';
 
 export class Subtitle implements ISubtitle {
   private _id: number;
