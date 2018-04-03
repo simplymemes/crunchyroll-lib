@@ -1,6 +1,6 @@
 {
   "name": "crunchyroll-lib",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "main": "bundles/crunchyroll-lib.umd.js",
   "types": "index.d.ts",
   "module": "index.js",
@@ -10,7 +10,7 @@
   ],
   "scripts": {
     "clean": "shx rm -rf dist",
-    "build": "npm run clean && tsc && tsc -m es6 --outDir dist/es2015 && webpack && shx cp package.json dist/package.json",
+    "build": "npm run clean && tsc && tsc -m es6 --outDir dist/es2015 && webpack && shx cp package.json dist/package.json && shx cp README.md dist/README.md",
     "yarn:publish": "yarn run build && cd dist && yarn publish && cd .."
   },
   "author": {
