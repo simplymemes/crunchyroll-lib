@@ -1,5 +1,8 @@
 import { ISubtitle } from "./ISubtitle";
 import { TextDecoder } from 'text-encoding';
+import { ISubtitleContent } from "./ISubtitleContent";
+import { SubtitleXMLModel } from "../resolvers/media/SubtitleContent";
+import { DOMParser } from "../services/xml/DOMParser";
 
 export class PreloadedSubtitle implements ISubtitle {
   private _id: number;
@@ -28,8 +31,15 @@ export class PreloadedSubtitle implements ISubtitle {
     return this._title;
   }
 
-  getContent(): Promise<Uint8Array> {
-    return Promise.resolve(this._content);
+  async getContent(): Promise<ISubtitleContent> {
+    const content = await this.getContentAsString();
+
+    const doc = await (new DOMParser()).parseFromString(content);
+
+    const subtitleScript = doc.getFirstElement();
+    if (!subtitleScript) throw new Error("No content in XML");
+
+    return new SubtitleXMLModel(subtitleScript);
   }
 
   async getContentAsString(): Promise<string> {

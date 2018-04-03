@@ -8,8 +8,8 @@ in the start of the application before anything else is done with this library.
 
 __Example__
 ```TypeScript
-import { NodeHttpClient } from "./services/http/NodeHttpClient";
-import { setHttpClient } from "./index";
+import { NodeHttpClient } from "crunchyroll-lib/services/http/NodeHttpClient";
+import { setHttpClient } from "crunchyroll-lib";
 
 // Set the Http client in the start of the application.
 setHttpClient(NodeHttpClient);
@@ -18,8 +18,8 @@ setHttpClient(NodeHttpClient);
 # Examples
 ## Browser
 ```TypeScript
-import { NodeHttpClient } from "./services/http/NodeHttpClient";
-import { getMedia, setHttpClient } from "./index";
+import { NodeHttpClient } from "crunchyroll-lib/services/http/NodeHttpClient";
+import { getMedia, setHttpClient } from "crunchyroll-lib";
 
 const run = async () => {
   const media = await getMedia('740239', '360p', 'http://www.crunchyroll.com/boruto-naruto-next-generations/episode-17-run-sarada-740239?p360=1');
@@ -37,8 +37,8 @@ run()
 
 ## Node
 ```TypeScript
-import { NodeHttpClient } from "./services/http/NodeHttpClient";
-import { getMedia, setHttpClient } from "./index";
+import { NodeHttpClient } from "crunchyroll-lib/services/http/NodeHttpClient";
+import { getMedia, setHttpClient } from "crunchyroll-lib";
 
 // Set the Http client to Node
 setHttpClient(NodeHttpClient);

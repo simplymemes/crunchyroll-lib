@@ -1,3 +1,5 @@
+import { ISubtitleContent } from "./ISubtitleContent";
+
 export interface ISubtitle {
   /**
    * Returns the ID of the subtitle.
@@ -12,7 +14,7 @@ export interface ISubtitle {
   /**
    * Retuns the content of the subtitle.
    */
-  getContent(): Promise<Uint8Array>;
+  getContent(): Promise<ISubtitleContent>;
 
   /**
    * Returns the content of the subtitle as string.

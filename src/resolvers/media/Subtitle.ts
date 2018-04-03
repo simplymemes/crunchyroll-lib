@@ -2,6 +2,9 @@ import { ISubtitleResolver } from "../../models/ISubtitleResolver";
 import { SingleAsync } from "../../utils/SingleAsync";
 import { ISubtitle } from "../../models/ISubtitle";
 import { TextDecoder } from 'text-encoding';
+import { ISubtitleContent } from "../../models/ISubtitleContent";
+import { DOMParser } from "../../services/xml/DOMParser";
+import { SubtitleXMLModel } from "./SubtitleContent";
 
 export class Subtitle implements ISubtitle {
   private _id: number;
@@ -37,8 +40,15 @@ export class Subtitle implements ISubtitle {
     return this._title;
   }
 
-  getContent(): Promise<Uint8Array> {
-    return this._singleRequest.get();
+  async getContent(): Promise<ISubtitleContent> {
+    const content = await this.getContentAsString();
+
+    const doc = await (new DOMParser()).parseFromString(content);
+
+    const subtitleScript = doc.getFirstElement();
+    if (!subtitleScript) throw new Error("No content in XML");
+
+    return new SubtitleXMLModel(subtitleScript);
   }
 
   async getContentAsString(): Promise<string> {

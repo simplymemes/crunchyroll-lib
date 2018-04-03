@@ -10,6 +10,13 @@ const run = async () => {
   const subtitles = media.getSubtitles();
   console.log("name, author, default");
   for (let i = 0; i < subtitles.length; i++)  {
+    const content = await subtitles[i].getContent();
+    console.log({
+      id: content.id,
+      title: content.title,
+      locale: content.locale,
+      localeString: content.localeString
+    });
     console.log(subtitles[i].getTitle() + ", " + subtitles[i].getAuthor() + ", " + (subtitles[i].isDefault() ? "true" : "false"));
   }
 };
