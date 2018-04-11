@@ -14,12 +14,20 @@ export class ConfigPreload extends BaseModel {
     return new ConfigMediaMetadata(this._getElement('media_metadata'));
   }
 
-  get subtitles(): ConfigMediaSubtitles {
-    return new ConfigMediaSubtitles(this._getElement('subtitles'));
+  get subtitles(): ConfigMediaSubtitles|undefined {
+    const subtitles = this._getElementOrUndefined('subtitles');
+    if (subtitles) {
+      return new ConfigMediaSubtitles(subtitles);
+    }
+    return undefined;
   }
 
-  get subtitle(): SubtitleModel {
-    return new SubtitleModel(this._getElement('subtitle'));
+  get subtitle(): SubtitleModel|undefined {
+    const subtitle = this._getElementOrUndefined('subtitle');
+    if (subtitle) {
+      return new SubtitleModel(subtitle);
+    }
+    return undefined;
   }
 
   get config(): ConfigPreloadConfig {

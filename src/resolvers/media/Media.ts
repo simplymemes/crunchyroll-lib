@@ -50,16 +50,19 @@ export class Media implements IMedia {
   }
 
   getSubtitles(): ISubtitle[] {
-    const subtitles: ISubtitle[] = [];
-
     const preload = this._config.preload;
+
+    if (!preload.subtitles)
+      return [];
+
+    const subtitles: ISubtitle[] = [];
 
     const items = preload.subtitles.items;
     const preloadedData = preload.subtitle;
 
     for (let i = 0; i < items.length; i++) {
       const item = items[i];
-      if (item.id === preloadedData.id) {
+      if (preloadedData !== undefined && item.id === preloadedData.id) {
         const iv = toByteArray(preloadedData.iv);
         const data = toByteArray(preloadedData.data);
 
