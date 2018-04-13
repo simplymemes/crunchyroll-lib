@@ -1,9 +1,18 @@
+export enum MediaType {
+  Anime = 1,
+  Game = 2,
+  MusicVideo = 3,
+  Trailer = 4,
+  Drama = 5,
+  UserVideo = 6,
+  Car = 7
+}
+
 export interface IStream {
   /**
    * Returns the type of stream.
-   * @todo Figure out the values of this to convert it into an enum.
    */
-  getType(): number;
+  getType(): MediaType;
 
   /**
    * Returns the file url.

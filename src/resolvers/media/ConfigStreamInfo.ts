@@ -1,12 +1,13 @@
 import { ConfigStreamInfoMetadata } from './ConfigStreamInfoMetadata';
 import { BaseModel } from './BaseModel';
+import { MediaType } from '../../models/IStream';
 
 export class ConfigStreamInfo extends BaseModel {
   get mediaId(): string {
     return this._getValue('media_id');
   }
 
-  get mediaType(): number {
+  get mediaType(): MediaType {
     return parseInt(this._getValue('media_type'), 10);
   }
 

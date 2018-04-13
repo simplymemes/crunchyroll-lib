@@ -1,4 +1,4 @@
-import { IStream } from "../../models/IStream";
+import { IStream, MediaType } from "../../models/IStream";
 import { ConfigStreamInfo } from "./ConfigStreamInfo";
 
 export class Stream implements IStream {
@@ -8,7 +8,7 @@ export class Stream implements IStream {
     this._stream = stream;
   }
 
-  getType(): number {
+  getType(): MediaType {
     return this._stream.mediaType;
   }
 
