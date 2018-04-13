@@ -1,6 +1,7 @@
 import { IStream } from "./IStream";
 import { ISubtitle } from "./ISubtitle";
 import { IMediaMetadata } from "./IMediaMetadata";
+import { IAdSlot } from "./IAdSlot";
 
 export interface IMedia {
   /**
@@ -27,6 +28,11 @@ export interface IMedia {
    * Returns list of subtitles.
    */
   getSubtitles(): ISubtitle[];
+
+  /**
+   * Returns list of ad slots
+   */
+  getAdSlots(): IAdSlot[];
 
   /**
    * Returns whether to auto-play the media.

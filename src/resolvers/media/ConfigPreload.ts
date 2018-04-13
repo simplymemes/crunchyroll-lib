@@ -4,6 +4,7 @@ import { ConfigMediaSubtitles } from './ConfigMediaSubtitles';
 import { SubtitleModel } from '../SubtitleResolver';
 import { BaseModel } from './BaseModel';
 import { ConfigPreloadConfig } from './ConfigPreloadConfig';
+import { AdSlot } from './AdSlot';
 
 export class ConfigPreload extends BaseModel {
   get streamInfo(): ConfigStreamInfo {
@@ -32,5 +33,15 @@ export class ConfigPreload extends BaseModel {
 
   get config(): ConfigPreloadConfig {
     return new ConfigPreloadConfig(this._getElement('config:Config'));
+  }
+
+  get adSlots(): AdSlot[] {
+    const adSlots = this._getElementOrUndefined('adSlots');
+
+    if (adSlots) {
+      return adSlots.children.map(x => new AdSlot(x));
+    }
+
+    return [];
   }
 }

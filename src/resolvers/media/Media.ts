@@ -11,6 +11,7 @@ import { MediaMetadata } from './MediaMetadata';
 import { Subtitle } from './Subtitle';
 import { PreloadedSubtitle } from '../../models/PreloadedSubtitle';
 import { toByteArray } from 'base64-js';
+import { IAdSlot } from '../../models/IAdSlot';
 
 export class Media implements IMedia {
   private _config: Config;
@@ -74,5 +75,20 @@ export class Media implements IMedia {
     }
 
     return subtitles;
+  }
+
+  getAdSlots(): IAdSlot[] {
+    return this._config.preload.adSlots.map(x => {
+      return {
+        type: x.type,
+        time: x.time,
+        vastAds: x.vastAds.map(x => {
+          return {
+            url: x.url,
+            order: x.order
+          };
+        })
+      };
+    });
   }
 }
