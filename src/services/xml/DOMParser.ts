@@ -1,4 +1,4 @@
-import * as sax from 'sax';
+import { parser as saxParser, QualifiedTag } from '../../vendor/sax';
 import { Document } from './Document';
 import { Node } from './Node';
 import { Element } from './Element';
@@ -7,7 +7,7 @@ import { Attribute } from './Attribute';
 
 export class DOMParser {
   async parseFromString(content: string): Promise<Document> {
-    const parser = sax.parser(true, {
+    const parser = saxParser(true, {
       xmlns: true
     });
 
@@ -19,7 +19,7 @@ export class DOMParser {
       parser.onerror = (err: Error) => reject(err);
       parser.onend = () => resolve();
 
-      parser.onopentag = (tag: sax.QualifiedTag) => {
+      parser.onopentag = (tag: QualifiedTag) => {
         const attributes: {[key: string]: Attribute} = {};
         for (let key in tag.attributes) {
           if (tag.attributes.hasOwnProperty(key)) {
