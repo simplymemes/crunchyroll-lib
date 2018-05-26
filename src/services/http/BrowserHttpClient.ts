@@ -1,6 +1,8 @@
 import { IHttpClient, BodyType } from "../../models/http/IHttpClient";
 import { IOptions } from "../../models/http/IOptions";
 import { IResponse } from "../../models/http/IResponse";
+import { IXMLHttpRequestFactory } from "../../models/http/IXMLHttpRequestFactory";
+import { Container } from "../../utils/container";
 
 function processBody(body?: BodyType): string|undefined {
   if (!body) return undefined;
@@ -28,6 +30,12 @@ function getResponse(req: XMLHttpRequest): IResponse<string> {
 }
 
 export class BrowserHttpClient implements IHttpClient {
+  private _container: Container;
+
+  constructor(container: Container) {
+    this._container = container;
+  }
+
   async get(url: string, options?: IOptions): Promise<IResponse<string>> {
     return await this.method('GET', url, undefined, options);
   }
@@ -38,7 +46,7 @@ export class BrowserHttpClient implements IHttpClient {
 
   method(method: string, url: string, body?: BodyType, options?: IOptions): Promise<IResponse<string>> {
     return new Promise<IResponse<string>>((resolve, reject) => {
-      const req = new XMLHttpRequest();
+      const req = this._container.get<IXMLHttpRequestFactory>("IXMLHttpRequestFactory").create();
       req.responseType = 'text';
 
       req.addEventListener("load", () => {
