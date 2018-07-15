@@ -1,4 +1,7 @@
 # Chrunchyroll Library
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/YePpHa/crunchyroll-lib.svg)](https://greenkeeper.io/)
+
 Library to get the media information about a Chrunchyroll video.
 
 ## How to use in Node
