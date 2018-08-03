@@ -107,7 +107,7 @@ export async function getMedia(mediaId: string, currentPage: string, options?: I
  * @param videoQuality the quality of the video.
  * @param options the options passed to Crunchyroll.
  */
-export async function getMedia(mediaId: string, currentPage: string, videoQuality: keyof Formats, options?: IMediaOptions): Promise<IMedia>;
+export async function getMedia(mediaId: string, currentPage: string, videoQuality?: keyof Formats, options?: IMediaOptions): Promise<IMedia>;
 
 export async function getMedia(mediaId: string, currentPage: string, optionsOrVideoQuality?: IMediaOptions|keyof Formats, options?: IMediaOptions): Promise<IMedia> {
   if (typeof optionsOrVideoQuality === "string") {
