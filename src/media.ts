@@ -61,89 +61,66 @@ function searchFor(text: string, start: string, end: string): string {
 /**
  * Returns the media.
  * @param url the URL of the media.
- * @param videoQuality the quality of the video.
  * @param options the options passed to Crunchyroll.
  */
-export async function getMediaByUrl(url: string, videoQuality: keyof Formats, options?: IMediaOptions): Promise<IMedia>;
+export async function getMediaByUrl(url: string, options?: IMediaOptions): Promise<IMedia>;
 
 /**
  * Returns the media.
  * @param url the URL of the media.
- * @param streamFormat the format ID of the video.
- * @param streamQuality the quality ID of the video.
+ * @param videoQuality the quality of the video.
  * @param options the options passed to Crunchyroll.
  */
-export async function getMediaByUrl(url: string, streamFormat: string, streamQuality: string, options?: IMediaOptions): Promise<IMedia>;
+export async function getMediaByUrl(url: string, videoQuality?: keyof Formats, options?: IMediaOptions): Promise<IMedia>;
 
-export async function getMediaByUrl(url: string, streamFormatOrVideoQuality: string|keyof Formats, streamQualityOrOptions?: string|IMediaOptions, options?: IMediaOptions): Promise<IMedia> {
-  let quality: string;
-  let format: string;
-
+export async function getMediaByUrl(url: string, optionsOrVideoQuality?: IMediaOptions|keyof Formats, options?: IMediaOptions): Promise<IMedia> {
   let { prefix, mediaId } = parseMediaUrl(url);
+  
+  if (prefix === "m") {
+    const httpClient = container.get<IHttpClient>("IHttpClient");
+    const response = await httpClient.get(url);
+    
+    url = searchFor(response.body, "<link rel=\"canonical\" href=\"", "\" />");
 
-  if (typeof streamFormatOrVideoQuality === "string" && typeof streamQualityOrOptions === "string") {
-    quality = streamQualityOrOptions;
-    format = streamFormatOrVideoQuality;
-  } else {
-    const formatMap = FORMAT_IDS[streamFormatOrVideoQuality as keyof Formats];
-    quality = formatMap.quality;
-    format = formatMap.format;
-
-    if (prefix === "m") {
-      const httpClient = container.get<IHttpClient>("IHttpClient");
-      const response = await httpClient.get(url);
-      
-      url = searchFor(response.body, "<link rel=\"canonical\" href=\"", "\" />");
-
-      mediaId = parseMediaUrl(url).mediaId;
-    }
+    mediaId = parseMediaUrl(url).mediaId;
   }
 
-  return await getMedia(mediaId, format, quality, url, options);
+  if (typeof optionsOrVideoQuality === "string") {
+    return await getMedia(mediaId, url, optionsOrVideoQuality, options);
+  } else {
+    return await getMedia(mediaId, url, optionsOrVideoQuality);
+  }
 }
 
 /**
  * Returns the media.
  * @param mediaId the ID of the media
- * @param videoQuality the quality of the video.
  * @param currentPage the URL of the media.
  * @param options the options passed to Crunchyroll.
  */
-export async function getMedia(mediaId: string, videoQuality: keyof Formats, currentPage: string, options?: IMediaOptions): Promise<IMedia>;
+export async function getMedia(mediaId: string, currentPage: string, options?: IMediaOptions): Promise<IMedia>;
 
 /**
  * Returns the media.
  * @param mediaId the ID of the media
- * @param streamFormat the format ID of the video.
- * @param streamQuality the quality ID of the video.
  * @param currentPage the URL of the media.
+ * @param videoQuality the quality of the video.
  * @param options the options passed to Crunchyroll.
  */
-export async function getMedia(mediaId: string, streamFormat: string, streamQuality: string, currentPage: string, options?: IMediaOptions): Promise<IMedia>;
+export async function getMedia(mediaId: string, currentPage: string, videoQuality: keyof Formats, options?: IMediaOptions): Promise<IMedia>;
 
-export async function getMedia(mediaId: string, videoQualityOrStreamFormat: string|keyof Formats, currentPageOrStreamQuality: string, optionsOrCurrentPage?: string|IMediaOptions, options?: IMediaOptions): Promise<IMedia> {
-  let streamFormat: string;
-  let streamQuality: string;
-  let currentPage: string;
-  if (typeof optionsOrCurrentPage === "string") {
-    streamFormat = videoQualityOrStreamFormat;
-    streamQuality = currentPageOrStreamQuality;
-    currentPage = optionsOrCurrentPage;
+export async function getMedia(mediaId: string, currentPage: string, optionsOrVideoQuality?: IMediaOptions|keyof Formats, options?: IMediaOptions): Promise<IMedia> {
+  if (typeof optionsOrVideoQuality === "string") {
+    const formatMap = FORMAT_IDS[optionsOrVideoQuality];
+
+    options = options || {};
+    options.streamFormat = formatMap.format;
+    options.streamQuality = formatMap.quality;
   } else {
-    const formatMap = FORMAT_IDS[videoQualityOrStreamFormat as keyof Formats];
-
-    streamFormat = formatMap.format;
-    streamQuality = formatMap.quality;
-    currentPage = currentPageOrStreamQuality;
-    options = optionsOrCurrentPage;
+    options = optionsOrVideoQuality;
   }
 
   const MediaResolver = container.get<IMediaResolver>("IMediaResolver");
-
-  options = options || {};
-
-  options.streamFormat = streamFormat;
-  options.streamQuality = streamQuality;
 
   return await MediaResolver.getMedia(mediaId, currentPage, options);
 }
