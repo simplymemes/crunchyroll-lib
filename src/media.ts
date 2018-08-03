@@ -140,5 +140,10 @@ export async function getMedia(mediaId: string, videoQualityOrStreamFormat: stri
 
   const MediaResolver = container.get<IMediaResolver>("IMediaResolver");
 
-  return await MediaResolver.getMedia(mediaId, streamFormat, streamQuality, currentPage, options);
+  options = options || {};
+
+  options.streamFormat = streamFormat;
+  options.streamQuality = streamQuality;
+
+  return await MediaResolver.getMedia(mediaId, currentPage, options);
 }

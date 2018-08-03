@@ -31,13 +31,19 @@ export class MediaResolver implements IMediaResolver {
     this._subtitleResolver = container.get("ISubtitleResolver");
   }
 
-  private _buildUrl(mediaId: string, streamFormat: string, streamQuality: string, currentPage: string, options?: IMediaOptions): string {
+  private _buildUrl(mediaId: string, currentPage: string, options?: IMediaOptions): string {
     let url = "http://www.crunchyroll.com/xml/?req=RpcApiVideoPlayer_GetStandardConfig"
       + "&media_id=" + encodeURIComponent(mediaId)
-      + "&video_format=" + encodeURIComponent(streamFormat)
-      + "&video_quality=" + encodeURIComponent(streamQuality)
       + "&current_page=" + encodeURIComponent(currentPage);
+    
     if (options) {
+      if (options.streamFormat) {
+        url += "&video_format=" + encodeURIComponent(options.streamFormat);
+      }
+      if (options.streamQuality) {
+        url += "&video_quality=" + encodeURIComponent(options.streamQuality);
+      }
+
       if (typeof options.autoPlay === 'boolean') {
         url += "&auto_play=" + (options.autoPlay ? '1' : '0');
       }
@@ -48,8 +54,8 @@ export class MediaResolver implements IMediaResolver {
     return url;
   }
 
-  async getMedia(mediaId: string, streamFormat: string, streamQuality: string, currentPage: string, options?: IMediaOptions): Promise<IMedia> {
-    const url = this._buildUrl(mediaId, streamFormat, streamQuality, currentPage, options);
+  async getMedia(mediaId: string, currentPage: string, options?: IMediaOptions): Promise<IMedia> {
+    const url = this._buildUrl(mediaId, currentPage, options);
     
     const response = await this._httpClient.get(url, {
       headers: {
